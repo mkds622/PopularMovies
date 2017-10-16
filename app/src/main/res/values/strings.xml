@@ -8,4 +8,7 @@
     <string name="popular_value">popularity.desc</string>
     <string name="top_rated">Top Rated</string>
     <string name="top_rated_value">top_rated.desc</string>
+    <string name="title_activity_details">DetailsActivity</string>
+    <string name="LargeTextTemp">Data Not Available.</string>
+    <string name="title">Title:</string>
 </resources>

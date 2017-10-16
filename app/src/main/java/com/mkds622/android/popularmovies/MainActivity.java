@@ -1,6 +1,9 @@
 package com.mkds622.android.popularmovies;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,6 +65,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     }
 
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
     @Override
     public void onClick(MovieItem movieSelected) {
         if(movieToast!=null){
@@ -70,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         Context context=this;
         movieToast=Toast.makeText(context,movieSelected.movieName,Toast.LENGTH_LONG);
         movieToast.show();
+        Intent intent=new Intent(this,DetailsActivity.class).putExtra(Intent.EXTRA_TEXT,String.valueOf(movieSelected.movieID));
+        startActivity(intent);
     }
 
     private void loadMovieData(){
@@ -138,11 +149,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             URL movieRequestUrl= NetworkUtils.buildUrl(filter,apiKey);
 
             try{
-                String jsonMovieString= NetworkUtils.getResponseFromHttpUrl(movieRequestUrl);
+                if(isOnline()) {
+                    String jsonMovieString = NetworkUtils.getResponseFromHttpUrl(movieRequestUrl);
 
-                MovieItem[] moviesArray = MovieDBJsonUtils.getMovieDataFromJSON(jsonMovieString);
+                    MovieItem[] moviesArray = MovieDBJsonUtils.getMovieDataFromJSON(jsonMovieString);
 
-                return moviesArray;
+                    return moviesArray;
+                }
+                else return null;
             }catch (Exception e){
                 e.printStackTrace();
                 return null;

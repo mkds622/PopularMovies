@@ -1,10 +1,16 @@
 package com.mkds622.android.popularmovies.Utilities;
 
+import android.view.View;
+import android.widget.TextView;
+
 import com.mkds622.android.popularmovies.MovieItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by Meetu on 03/10/17.
@@ -36,6 +42,11 @@ public class MovieDBJsonUtils {
         return RESULT;
     }
 
+    public static JSONObject getMovieDetailsFromJSONString(String jsonMovieDetail)throws JSONException {
+
+        JSONObject J1= new JSONObject(jsonMovieDetail);
+        return J1;
+    }
 
 
 }
