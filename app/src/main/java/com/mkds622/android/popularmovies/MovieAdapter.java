@@ -2,6 +2,7 @@ package com.mkds622.android.popularmovies;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
 
     private Context context;
-    private List<MovieItem> mMovieList;
+    private MovieItem[] mMovieList;
 
 
     private final MovieAdapterOnClickHandler mMovieClickHandler;
@@ -49,7 +50,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         @Override
         public void onClick(View v) {
             int adapterPosition=getAdapterPosition();
-            MovieItem movieSelected=mMovieList.get(adapterPosition);
+            MovieItem movieSelected=mMovieList[adapterPosition];
             mMovieClickHandler.onClick(movieSelected);
         }
     }
@@ -68,13 +69,22 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
     @Override
     public void onBindViewHolder(MovieAdapterViewHolder holder, int position) {
-        MovieItem movieItem=mMovieList.get(position);
+        MovieItem movieItem=mMovieList[position];
         Picasso.with(context).load(movieItem.imageUrl.toString()).into(holder.mMovieItemImageView);
         holder.mMovieItemTextView.setText(movieItem.movieName);
+        Log.e("Movie Adapter","Image=" + movieItem.imageUrl.toString());
     }
 
     @Override
     public int getItemCount() {
+        if(mMovieList== null)
         return 0;
+        return mMovieList.length;
     }
+
+    public void setMovieData(MovieItem[] moviesArray) {
+        mMovieList = moviesArray;
+        notifyDataSetChanged();
+    }
+
 }

@@ -5,22 +5,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.mkds622.android.popularmovies.MainActivity">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/moviep_recycler_view"
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <TextView
-        android:id="@+id/error_msg_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:padding="16dp"
-        android:text="@string/error_msg"
-        android:visibility="invisible"/>
-    <ProgressBar
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_gravity="center"
-        />
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/sort_by"
+                android:layout_gravity="center_vertical"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/RadioSort"
+                android:layout_weight="0.47"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/popular"
+                    android:value="@string/popular_value"
+                    android:id="@+id/popular_radio"
+                    android:checked="true"
+                    android:layout_weight="0.5" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/top_rated"
+                    android:value="@string/top_rated_value"
+                    android:id="@+id/toprated_radio"
+                    android:layout_weight="0.5"
+                    android:checked="false" />
+
+            </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/moviep_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+            <TextView
+                android:id="@+id/error_msg_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:padding="16dp"
+                android:text="@string/error_msg"
+                android:visibility="invisible"/>
+            <ProgressBar
+                android:id="@+id/loading_progress_bar"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
 </FrameLayout>

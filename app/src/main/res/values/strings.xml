@@ -2,4 +2,10 @@
     <string name="app_name">Popular Movies</string>
     <string name="error_msg">An error has occured. Please try again by clicking REFRESH!</string>
     <string name="movie_name_unavailable">Name Unavailable</string>
+    <string name="refresh">Refresh</string>
+    <string name="sort_by">Sort By:</string>
+    <string name="popular">Popular</string>
+    <string name="popular_value">popularity.desc</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="top_rated_value">top_rated.desc</string>
 </resources>
